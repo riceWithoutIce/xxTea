@@ -5,7 +5,7 @@
 #include <string.h>
 
 #ifndef XXTEA_TYPE
-#define XXTEA_TYPE long         // 一种32位长的数据类型，因int在32bit和64bit系统中都是32位的，故直接用int
+#define XXTEA_TYPE int         // 一种32位长的数据类型，因int在32bit和64bit系统中都是32位的，故直接用int
 #endif
 
 class XXTEA {
