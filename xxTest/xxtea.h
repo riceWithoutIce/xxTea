@@ -14,7 +14,7 @@ public:
 	~XXTEA();
 
 public:
-	static void TEST();
+	void TEST();
 	/**
 	*    @brief     获得输出缓冲区的长度
 	*
@@ -23,7 +23,7 @@ public:
 	*
 	*    @return    返回所需长度
 	*/
-	static size_t XXTEAGetBufferLength(size_t nLength, bool isEncode);
+	size_t XXTEAGetBufferLength(size_t nLength, bool isEncode);
 
 	/**
 	*    @brief    对数据流进行加密
@@ -35,7 +35,7 @@ public:
 	*
 	*    @return    加密是否成功
 	*/
-	static bool XXTEAEncode(char* lpDstBuffer, const char* lpSrcBuffer, size_t nLength, const XXTEA_TYPE* lpKey);
+	bool XXTEAEncode(char* lpDstBuffer, const char* lpSrcBuffer, size_t nLength, const XXTEA_TYPE* lpKey);
 
 	/**
 	*    @brief    对数据流进行解密
@@ -47,7 +47,7 @@ public:
 	*
 	*    @return    解密是否成功
 	*/
-	static bool XXTEADecode(char* lpDstBuffer, const char* lpSrcBuffer, size_t nLength, const XXTEA_TYPE* lpKey);
+	bool XXTEADecode(char* lpDstBuffer, const char* lpSrcBuffer, size_t nLength, const XXTEA_TYPE* lpKey);
 
 private:
 	/**
@@ -59,7 +59,7 @@ private:
 	*
 	*    @return    返回0表示加解密成功，返回1表示失败
 	*/
-	static long btea(XXTEA_TYPE* v, long n, const XXTEA_TYPE* k);
+	long btea(XXTEA_TYPE* v, long n, const XXTEA_TYPE* k);
 
 	/**
 	*    @brief    正常字符串以16进制保存
@@ -68,7 +68,7 @@ private:
 	*    @param     length     源缓冲区长度
 	*    @param     dstBuffer     目标缓冲区
 	*/
-	static void StringToHex(const char* surBuffer, int length, char* dstBuffer);
+	void StringToHex(const char* surBuffer, int length, char* dstBuffer);
 
 	/**
 	*    @brief    16进制字符串解析成正常字符串
@@ -78,7 +78,5 @@ private:
 	*
 	*    @return    目标缓冲区的长度
 	*/
-	static int HexToString(const char* surBuffer, char* dstBuffer);
+	int HexToString(const char* surBuffer, char* dstBuffer);
 };
-
-

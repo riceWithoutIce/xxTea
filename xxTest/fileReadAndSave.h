@@ -31,14 +31,13 @@ public:
 		sprintf(m_outFileName, "%s", ch);
 	}
 
-	int getKey()
+	int* getKey()
 	{
-		return m_key;
+		return m_pKey;
 	}
-	void setKey(int key)
+	void setKey(int* pKey)
 	{
-		m_key = key;
-		m_pKey = &m_key;
+		m_pKey = pKey;
 	}
 
 #pragma endregion
@@ -47,13 +46,12 @@ public:
 	void saveFile(bool isEncode);
 
 private:
+	XXTEA* m_xxtea;
 	char* m_inFileName;
 	char* m_outFileName;
 	char* m_inBuffer;
 	char* m_outBuffer;
-	long m_inSize;
-	long m_outSize;
-	int m_key;
-	int* m_pKey;
+	size_t m_inSize;
+	size_t m_outSize;
+	XXTEA_TYPE* m_pKey;
 };
-

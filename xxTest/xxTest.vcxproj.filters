@@ -30,6 +30,9 @@
     <ClInclude Include="fileReadAndSave.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="dataFormat.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -42,6 +45,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="fileReadAndSave.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="dataFormat.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
