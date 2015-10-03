@@ -4,12 +4,12 @@
 #include "stdafx.h"
 #include <iostream>
 #include "fileReadAndSave.h"
-#include "xxtea.h"
+#include "dataFormat.h"
 
 using namespace std;
 int _tmain(int argc, _TCHAR* argv[])
 {
-	fileReadAndSave* pFile = new fileReadAndSave();
+	/*fileReadAndSave* pFile = new fileReadAndSave();
 	char inFileName[512] = "encode.txt";
 	char outFileName[512] = "decode.txt";
 	XXTEA_TYPE key[4] = {1, 2, 3, 4};
@@ -18,7 +18,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	pFile->setOutFileName(outFileName);
 	pFile->setKey(key);
 	pFile->readFile();
-	pFile->saveFile(isEncode);
+	pFile->saveFile(isEncode);*/
+
+	dataFormat* pDataFormat = new dataFormat();
+	pDataFormat->initFile(1, "hello");
+	pDataFormat->display();
 
 	printf("complete\n");
 

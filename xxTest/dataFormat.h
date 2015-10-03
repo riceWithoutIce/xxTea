@@ -2,12 +2,13 @@
 #include <vector>
 #include "fileReadAndSave.h"
 
-struct  fileinfo
+//length 144
+typedef struct 
 {
 	char filename[128];
 	__int64 offset;
 	__int64 size;
-};
+}fileinfo;
 
 class header
 {
@@ -24,7 +25,7 @@ public:
 		m_fileNum = num;
 	}
 
-	void pushVecFileInfo(struct fileinfo* pInfo)
+	void pushVecFileInfo(fileinfo* pInfo)
 	{
 		m_vecFileInfo.push_back(pInfo);
 	}
@@ -33,10 +34,11 @@ public:
 
 	char* getSingleInfoBuffer(int index);
 	char* format();
+	void display();
 
 private:
-	__int32 m_fileNum;
-	std::vector <struct fileinfo*> m_vecFileInfo;
+	__int64 m_fileNum;
+	std::vector <fileinfo*> m_vecFileInfo;
 };
 
 class dataFormat
@@ -46,11 +48,13 @@ public:
 	~dataFormat();
 
 public:
-	void initAllFile();
+	void initFile(int num, char* path);
+	void readAllFile();
 	void setFileSizeAndOffset();
-	char* format();
+	void format();
+	void display();
 private:
 	header* m_pHeader;
-	std::vector <char*> m_vecFile;
+	std::vector <char*> m_vecFileBuff;
 
 };
