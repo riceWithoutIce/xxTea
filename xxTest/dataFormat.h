@@ -48,7 +48,7 @@ public:
 	~dataFormat();
 
 public:
-	void initFile(int num, char* path);
+	void initFile(int num, std::vector<char*> vecPath);
 	void readAllFile();
 	void setFileSizeAndOffset();
 	void format();

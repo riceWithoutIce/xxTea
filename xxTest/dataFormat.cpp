@@ -48,14 +48,14 @@ dataFormat::~dataFormat()
 {
 }
 
-void dataFormat::initFile(int num, char* path)
+void dataFormat::initFile(int num, std::vector<char*> vecPath)
 {
 	m_pHeader = new header();
 	m_pHeader->setFileNum(num);
 	for (int i = 0; i < num; i++)
 	{
 		fileinfo* file = new fileinfo();
-		strcpy(file->filename, path);
+		strcpy(file->filename, vecPath[i]);
 		m_pHeader->pushVecFileInfo(file);
 	}
 }

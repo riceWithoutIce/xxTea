@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include <iostream>
+#include <vector>
 #include "fileReadAndSave.h"
 #include "dataFormat.h"
 
@@ -21,7 +22,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	pFile->saveFile(isEncode);*/
 
 	dataFormat* pDataFormat = new dataFormat();
-	pDataFormat->initFile(1, "hello");
+	std::vector<char*> vecFilePath;
+	for (int i = 0; i < 3; i++)
+	{
+		char path[128] = "hello\n";
+		vecFilePath.push_back(path);
+	}
+	
+	pDataFormat->initFile(3, vecFilePath);
 	pDataFormat->display();
 
 	printf("complete\n");
