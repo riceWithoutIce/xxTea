@@ -15,7 +15,7 @@ class header
 public:
 #pragma region get set
 
-	int getFileNum()
+	__int64 getFileNum()
 	{
 		return m_fileNum;
 	}
@@ -28,6 +28,11 @@ public:
 	void pushVecFileInfo(fileinfo* pInfo)
 	{
 		m_vecFileInfo.push_back(pInfo);
+	}
+
+	__int64 getOffset(int index)
+	{
+		return m_vecFileInfo[index - 1]->offset + m_vecFileInfo[index - 1]->size;
 	}
 
 #pragma endregion
@@ -48,13 +53,11 @@ public:
 	~dataFormat();
 
 public:
-	void initFile(int num, std::vector<char*> vecPath);
-	void readAllFile();
-	void setFileSizeAndOffset();
+	void readFile(int num, std::vector<char*> vecPath);
 	void format();
 	void display();
 private:
 	header* m_pHeader;
 	std::vector <char*> m_vecFileBuff;
-
+	fileReadAndSave* m_pFile;
 };

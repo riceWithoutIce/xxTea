@@ -43,6 +43,7 @@ public:
 #pragma endregion
 
 	void readFile();
+	char* readFile(const char* fileName, __int64& size);
 	void saveFile(bool isEncode);
 
 private:

@@ -1,4 +1,4 @@
-﻿生成启动时间为 2015/10/4 17:20:42。
+﻿生成启动时间为 2015/10/4 23:02:17。
      1>项目“D:\exercises\xxTea\xxTest\xxTest.vcxproj”在节点 2 上(Build 个目标)。
        项目文件包含 ToolsVersion="12.0"。此工具集可能未知或缺失。在这种情况下，通过安装 MSBuild 的正确版本，或许可以解决此问题。否则，该 build 可能已因策略原因而被强制为某个特定 ToolsVersion。将该项目视为其已具有 ToolsVersion="4.0"。有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=291333。
      1>ClCompile:
@@ -8,7 +8,7 @@
                  d:\vs\2012\vs2012\vc\include\stdio.h(357) : 参见“sprintf”的声明
      1>d:\exercises\xxtea\xxtest\filereadandsave.h(31): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  d:\vs\2012\vs2012\vc\include\stdio.h(357) : 参见“sprintf”的声明
-     1>d:\exercises\xxtea\xxtest\dataformat.h(20): warning C4244: “return”: 从“__int64”转换到“int”，可能丢失数据
+     1>d:\exercises\xxtea\xxtest\xxtest.cpp(33): warning C4244: “参数”: 从“__int64”转换到“int”，可能丢失数据
        Link:
          D:\vs\2012\vs2012\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\exercises\xxTea\Debug\xxTest.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\exercises\xxTea\Debug\xxTest.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\exercises\xxTea\Debug\xxTest.lib" /MACHINE:X86 Debug\dataFormat.obj
          Debug\fileReadAndSave.obj
@@ -20,4 +20,4 @@
 
 生成成功。
 
-已用时间 00:00:00.94
+已用时间 00:00:01.06

@@ -37,7 +37,26 @@ void fileReadAndSave::readFile()
 	m_inBuffer = new char[m_inSize + 1];
 	fin.read(m_inBuffer, m_inSize);
 	m_inBuffer[m_inSize + 1] = '\0';
+	printf(m_inBuffer);
 	fin.close();
+}
+
+char* fileReadAndSave::readFile(const char* fileName, __int64& size)
+{
+	ifstream fin(fileName, ios::in | ios::binary | ios::ate);
+	if (!fin)
+	{
+		printf("File open error!\n");
+		return 0;
+	}
+	char* buffer;
+	size = fin.tellg();
+	fin.seekg(0, ios::beg);
+	buffer = new char[size + 1];
+	fin.read(buffer, size);
+	buffer[size + 1] = '\0';
+	fin.close();
+	return buffer;
 }
 
 void fileReadAndSave::saveFile(bool isEncode)
