@@ -4,30 +4,46 @@
 
 char* header::getSingleInfoBuffer(int index)
 {
-	char buffer[144];
-	char chOffset[8];
-	char chSize[8];
+	char buffer[FILEINFOSIZE] = {0};
+	char chOffset[SIZE] = {0};
+	char chSize[SIZE] = {0};
 	__int64 offset = m_vecFileInfo[index]->offset;
 	__int64 size = m_vecFileInfo[index]->size;
-	sprintf(chOffset, "%ll", offset);
-	sprintf(chSize, "%ll", size);
-	strcat(buffer, m_vecFileInfo[index]->filename);
-	strcat(buffer, chOffset);
-	strcat(buffer, chSize);
-
+	itoa(offset, chOffset, 10);
+	itoa(size, chSize, 10);
+	copyTo(m_vecFileInfo[index]->filename, buffer, 0);
+	copyTo(chOffset, buffer, FILENAMESIZE);
+	copyTo(chSize, buffer, FILENAMESIZE + SIZE);
 	return buffer;
 }
 
 char* header::format()
 {
 	char* buffer;
-	__int64 size = 8 + (128 + 8 + 8) * m_fileNum;
-	buffer = new char[size];
+	char chNum[SIZE] = {0};
+	m_headerSize = SIZE + FILEINFOSIZE* m_fileNum;
+	int index = SIZE;
+	m_size = 0;
+	buffer = new char[m_headerSize];
+	for (int i = 0; i < m_headerSize; i++)
+		buffer[i] = '\0';
+	itoa(m_fileNum, chNum, 10);
+	copyTo(chNum, buffer, 0);
 	for (int i = 0; i < m_fileNum; i++)
 	{
-		strcat(buffer, getSingleInfoBuffer(i));
+		char* ch = getSingleInfoBuffer(i);
+		strcat(buffer + index, ch);
+		strcat(buffer + index + FILENAMESIZE, ch + FILENAMESIZE);
+		strcat(buffer + index + FILENAMESIZE + SIZE, ch + FILENAMESIZE + SIZE);
+		index += FILEINFOSIZE;
+		m_size += getFileInfoSize(i);
 	}
 	return buffer;
+}
+
+void header::copyTo(const char* srcStr, char* disStr, int index)
+{
+	strcat(disStr + index, srcStr);
 }
 
 void header::display()
@@ -66,27 +82,36 @@ void dataFormat::readFile(int num, std::vector<char*> vecPath)
 
 void dataFormat::xxTea()
 {
-	int fileNum = m_pHeader->getFileNum();
+	__int64 fileNum = m_pHeader->getFileNum();
 	for (int i = 0; i < fileNum; i++)
 	{
-		__int64 intSize = m_pHeader->getSize(i);
+		__int64 intSize = m_pHeader->getFileInfoSize(i);
 		__int64 outSize = 0;
 		m_vecEncodeBuff.push_back(m_pFile->xxTeaFile(m_vecFileBuff[i], intSize, outSize, m_pKey));
-		m_pHeader->setSize(i, outSize);
+		m_pHeader->setFileInfoSize(i, outSize);
 		if (i == 0)
 		{
-			m_pHeader->setOffset(i, 8 + 144 * fileNum);
+			m_pHeader->setFileInfoOffset(i, SIZE + FILEINFOSIZE * fileNum);
 		}
 		else
 		{
-			m_pHeader->setOffset(i, m_pHeader->getOffset(i));
+			m_pHeader->setFileInfoOffset(i, m_pHeader->getFileInfoOffset(i));
 		}
 	}
 }
 
 void dataFormat::format()
 {
-	
+	char* headBuff = m_pHeader->format();
+	__int64 headerSize = m_pHeader->getHeaderSize();
+	__int64 size = m_pHeader->getSize() + 1;
+	__int64 fileNum = m_pHeader->getFileNum();
+	m_pFile->saveFile(headBuff, headerSize);
+	for (int i = 0; i < fileNum; i++)
+	{
+		__int64 fileSize = m_pHeader->getFileInfoSize(i);
+		m_pFile->saveFileAtTheEnd(m_vecEncodeBuff[i], fileSize);
+	}
 }
 
 void dataFormat::display()

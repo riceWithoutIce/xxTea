@@ -34,6 +34,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	pDataFormat->setKey(key);
 	pDataFormat->readFile(fileNum, vecFilePath);
 	pDataFormat->xxTea();
+	pDataFormat->format();
 	pDataFormat->display();
 
 	printf("complete\n");

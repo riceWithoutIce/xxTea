@@ -87,6 +87,20 @@ void fileReadAndSave::saveFile(bool isEncode)
 	fout.close();
 }
 
+void fileReadAndSave::saveFile(char* buffer, __int64 size)
+{
+	ofstream fout("result.txt", ios::binary);
+	fout.write(buffer, size);
+	fout.close();
+}
+
+void fileReadAndSave::saveFileAtTheEnd(char* buffer, __int64 size)
+{
+	ofstream fout("result.txt", ios::binary | ios::app);
+	fout.write(buffer, size);
+	fout.close();
+}
+
 char* fileReadAndSave::xxTeaFile(char* inBuffer, const __int64 inSize, __int64& outSize, XXTEA_TYPE* pKey)
 {
 	outSize = m_xxtea->XXTEAGetBufferLength(inSize, true);

@@ -45,6 +45,8 @@ public:
 	void readFile();
 	char* readFile(const char* fileName, __int64& size);
 	void saveFile(bool isEncode);
+	void saveFile(char* buffer, __int64 size);
+	void saveFileAtTheEnd(char* buffer, __int64 size);
 	char* xxTeaFile(char* buffer, const __int64 size, __int64& outSize, XXTEA_TYPE* pKey);
 
 private:
