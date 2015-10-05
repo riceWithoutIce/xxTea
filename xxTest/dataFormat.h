@@ -34,6 +34,21 @@ public:
 	{
 		return m_vecFileInfo[index - 1]->offset + m_vecFileInfo[index - 1]->size;
 	}
+	
+	void setOffset(int index, __int64 offset)
+	{
+		m_vecFileInfo[index]->offset = offset;
+	}
+
+	__int64 getSize(int index)
+	{
+		return m_vecFileInfo[index]->size;
+	}
+
+	void setSize(int index, __int64 size)
+	{
+		m_vecFileInfo[index]->size = size;
+	}
 
 #pragma endregion
 
@@ -53,11 +68,23 @@ public:
 	~dataFormat();
 
 public:
+	int* getKey()
+	{
+		return m_pKey;
+	}
+	void setKey(int* pKey)
+	{
+		m_pKey = pKey;
+	}
+
 	void readFile(int num, std::vector<char*> vecPath);
+	void xxTea();
 	void format();
 	void display();
 private:
 	header* m_pHeader;
 	std::vector <char*> m_vecFileBuff;
+	std::vector <char*> m_vecEncodeBuff;
 	fileReadAndSave* m_pFile;
+	XXTEA_TYPE* m_pKey;
 };

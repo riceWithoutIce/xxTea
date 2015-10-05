@@ -60,30 +60,36 @@ void dataFormat::readFile(int num, std::vector<char*> vecPath)
 		fileinfo* file = new fileinfo();
 		strcpy(file->filename, vecPath[i]);
 		m_vecFileBuff.push_back(m_pFile->readFile(vecPath[i], file->size));
+		m_pHeader->pushVecFileInfo(file);
+	}
+}
+
+void dataFormat::xxTea()
+{
+	int fileNum = m_pHeader->getFileNum();
+	for (int i = 0; i < fileNum; i++)
+	{
+		__int64 intSize = m_pHeader->getSize(i);
+		__int64 outSize = 0;
+		m_vecEncodeBuff.push_back(m_pFile->xxTeaFile(m_vecFileBuff[i], intSize, outSize, m_pKey));
+		m_pHeader->setSize(i, outSize);
 		if (i == 0)
 		{
-			file->offset = 144;
+			m_pHeader->setOffset(i, 8 + 144 * fileNum);
 		}
 		else
 		{
-			file->offset = m_pHeader->getOffset(i);
+			m_pHeader->setOffset(i, m_pHeader->getOffset(i));
 		}
-		m_pHeader->pushVecFileInfo(file);
 	}
 }
 
 void dataFormat::format()
 {
-
+	
 }
 
 void dataFormat::display()
 {
-	//printf(m_vecFileBuff[0]);
-	/*std::vector <char*>::iterator iter;
-	for (iter = m_vecFileBuff.begin(); iter != m_vecFileBuff.end(); iter++)
-	{
-		printf(*iter);
-	}*/
 	m_pHeader->display();
 }

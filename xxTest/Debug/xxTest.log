@@ -1,14 +1,30 @@
-﻿生成启动时间为 2015/10/4 23:02:17。
+﻿生成启动时间为 2015/10/5 14:06:26。
      1>项目“D:\exercises\xxTea\xxTest\xxTest.vcxproj”在节点 2 上(Build 个目标)。
        项目文件包含 ToolsVersion="12.0"。此工具集可能未知或缺失。在这种情况下，通过安装 MSBuild 的正确版本，或许可以解决此问题。否则，该 build 可能已因策略原因而被强制为某个特定 ToolsVersion。将该项目视为其已具有 ToolsVersion="4.0"。有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=291333。
      1>ClCompile:
-         D:\vs\2012\vs2012\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\xxTest.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt xxTest.cpp
-         xxTest.cpp
+         D:\vs\2012\vs2012\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\xxTest.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt dataFormat.cpp
+         dataFormat.cpp
      1>d:\exercises\xxtea\xxtest\filereadandsave.h(20): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  d:\vs\2012\vs2012\vc\include\stdio.h(357) : 参见“sprintf”的声明
      1>d:\exercises\xxtea\xxtest\filereadandsave.h(31): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  d:\vs\2012\vs2012\vc\include\stdio.h(357) : 参见“sprintf”的声明
-     1>d:\exercises\xxtea\xxtest\xxtest.cpp(33): warning C4244: “参数”: 从“__int64”转换到“int”，可能丢失数据
+     1>d:\exercises\xxtea\xxtest\dataformat.cpp(12): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\vs\2012\vs2012\vc\include\stdio.h(357) : 参见“sprintf”的声明
+     1>d:\exercises\xxtea\xxtest\dataformat.cpp(13): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\vs\2012\vs2012\vc\include\stdio.h(357) : 参见“sprintf”的声明
+     1>d:\exercises\xxtea\xxtest\dataformat.cpp(14): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\vs\2012\vs2012\vc\include\string.h(115) : 参见“strcat”的声明
+     1>d:\exercises\xxtea\xxtest\dataformat.cpp(15): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\vs\2012\vs2012\vc\include\string.h(115) : 参见“strcat”的声明
+     1>d:\exercises\xxtea\xxtest\dataformat.cpp(16): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\vs\2012\vs2012\vc\include\string.h(115) : 参见“strcat”的声明
+     1>d:\exercises\xxtea\xxtest\dataformat.cpp(18): warning C4172: 返回局部变量或临时变量的地址
+     1>d:\exercises\xxtea\xxtest\dataformat.cpp(25): warning C4244: “初始化”: 从“__int64”转换到“unsigned int”，可能丢失数据
+     1>d:\exercises\xxtea\xxtest\dataformat.cpp(28): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\vs\2012\vs2012\vc\include\string.h(115) : 参见“strcat”的声明
+     1>d:\exercises\xxtea\xxtest\dataformat.cpp(61): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 d:\vs\2012\vs2012\vc\include\string.h(110) : 参见“strcpy”的声明
+     1>d:\exercises\xxtea\xxtest\dataformat.cpp(69): warning C4244: “初始化”: 从“__int64”转换到“int”，可能丢失数据
        Link:
          D:\vs\2012\vs2012\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\exercises\xxTea\Debug\xxTest.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\exercises\xxTea\Debug\xxTest.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\exercises\xxTea\Debug\xxTest.lib" /MACHINE:X86 Debug\dataFormat.obj
          Debug\fileReadAndSave.obj
@@ -20,4 +36,4 @@
 
 生成成功。
 
-已用时间 00:00:01.06
+已用时间 00:00:01.00

@@ -56,6 +56,7 @@ char* fileReadAndSave::readFile(const char* fileName, __int64& size)
 	fin.read(buffer, size);
 	buffer[size + 1] = '\0';
 	fin.close();
+	//size = m_xxtea->XXTEAGetBufferLength(size, true);
 	return buffer;
 }
 
@@ -84,4 +85,12 @@ void fileReadAndSave::saveFile(bool isEncode)
 	m_outBuffer[m_outSize + 1] = '\0';
 	fout.write(m_outBuffer, m_outSize);
 	fout.close();
+}
+
+char* fileReadAndSave::xxTeaFile(char* inBuffer, const __int64 inSize, __int64& outSize, XXTEA_TYPE* pKey)
+{
+	outSize = m_xxtea->XXTEAGetBufferLength(inSize, true);
+	char* outBuffer = new char[outSize];
+	m_xxtea->XXTEAEncode(outBuffer, inBuffer, inSize, pKey);
+	return outBuffer;
 }
