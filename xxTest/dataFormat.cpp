@@ -1,6 +1,19 @@
 #include "stdafx.h"
 #include "dataFormat.h"
 
+header::header()
+{
+
+}
+
+header::~header()
+{
+	for (int i = 0; i < m_fileNum; i ++)
+	{
+		delete[] m_vecFileInfo[i];
+		m_vecFileInfo[i] = nullptr;
+	}
+}
 
 char* header::getSingleInfoBuffer(int index)
 {
@@ -65,6 +78,17 @@ dataFormat::dataFormat()
 
 dataFormat::~dataFormat()
 {
+	for (int i = 0; i < m_pHeader->getFileNum(); i++)
+	{
+		delete[] m_vecFileBuff[i];
+		m_vecFileBuff[i] = nullptr;
+		delete[] m_vecEncodeBuff[i];
+		m_vecEncodeBuff[i] = nullptr;
+	}
+	delete m_pFile;
+	m_pFile = nullptr;
+	delete m_pHeader;
+	m_pHeader = nullptr;
 }
 
 void dataFormat::readFile(int num, std::vector<char*> vecPath)
@@ -77,6 +101,8 @@ void dataFormat::readFile(int num, std::vector<char*> vecPath)
 		strcpy(file->filename, vecPath[i]);
 		m_vecFileBuff.push_back(m_pFile->readFile(vecPath[i], file->size));
 		m_pHeader->pushVecFileInfo(file);
+		__int64 encodeSize = m_pFile->getxxTeaBufferSize(file->size, true);
+		m_vecEncodeBuff.push_back(new char[encodeSize]);
 	}
 }
 
@@ -87,7 +113,7 @@ void dataFormat::xxTea()
 	{
 		__int64 intSize = m_pHeader->getFileInfoSize(i);
 		__int64 outSize = 0;
-		m_vecEncodeBuff.push_back(m_pFile->xxTeaFile(m_vecFileBuff[i], intSize, outSize, m_pKey));
+		strcpy(m_vecEncodeBuff[i], (m_pFile->xxTeaFile(m_vecFileBuff[i], intSize, outSize, m_pKey)));
 		m_pHeader->setFileInfoSize(i, outSize);
 		if (i == 0)
 		{

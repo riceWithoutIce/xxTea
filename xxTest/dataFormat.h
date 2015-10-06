@@ -17,6 +17,9 @@ typedef struct
 class header
 {
 public:
+	header();
+	~header();
+public:
 #pragma region get set
 
 	__int64 getFileNum()
@@ -103,6 +106,5 @@ private:
 	std::vector <char*> m_vecFileBuff;
 	std::vector <char*> m_vecEncodeBuff;
 	fileReadAndSave* m_pFile;
-	char * m_buffer;
 	XXTEA_TYPE* m_pKey;
 };
