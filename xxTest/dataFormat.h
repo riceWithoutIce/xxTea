@@ -88,6 +88,8 @@ public:
 	~dataFormat();
 
 public:
+#pragma region get set
+
 	int* getKey()
 	{
 		return m_pKey;
@@ -97,14 +99,20 @@ public:
 		m_pKey = pKey;
 	}
 
+#pragma endregion
+
 	void readFile(int num, std::vector<char*> vecPath);
-	void xxTea();
+	void xxTea(bool isMultiple);
+	void singleXXTEA();
+	void multipleXXTEA();
+	static void thXXTEA(int index, __int64 fileNum);
 	void format();
 	void display();
+
 private:
-	header* m_pHeader;
-	std::vector <char*> m_vecFileBuff;
-	std::vector <char*> m_vecEncodeBuff;
-	fileReadAndSave* m_pFile;
-	XXTEA_TYPE* m_pKey;
+	static header* m_pHeader;
+	static std::vector <char*> m_vecFileBuff;
+	static std::vector <char*> m_vecEncodeBuff;
+	static fileReadAndSave* m_pFile;
+	static XXTEA_TYPE* m_pKey;
 };

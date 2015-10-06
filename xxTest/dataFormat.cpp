@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "dataFormat.h"
+#include <thread>
 
 header::header()
 {
@@ -70,9 +71,14 @@ void header::display()
 	}
 }
 
+header* dataFormat::m_pHeader = nullptr;
+std::vector <char*> dataFormat::m_vecFileBuff;
+std::vector <char*> dataFormat::m_vecEncodeBuff;
+fileReadAndSave* dataFormat::m_pFile = new fileReadAndSave();
+XXTEA_TYPE* dataFormat::m_pKey = nullptr;
+
 dataFormat::dataFormat()
 {
-	m_pFile = new fileReadAndSave();
 }
 
 
@@ -106,24 +112,48 @@ void dataFormat::readFile(int num, std::vector<char*> vecPath)
 	}
 }
 
-void dataFormat::xxTea()
+void dataFormat::xxTea(bool isMultiple)
+{
+	if (isMultiple)
+		multipleXXTEA();
+	else
+		singleXXTEA();
+}
+
+void dataFormat::singleXXTEA()
 {
 	__int64 fileNum = m_pHeader->getFileNum();
 	for (int i = 0; i < fileNum; i++)
 	{
-		__int64 intSize = m_pHeader->getFileInfoSize(i);
-		__int64 outSize = 0;
-		strcpy(m_vecEncodeBuff[i], (m_pFile->xxTeaFile(m_vecFileBuff[i], intSize, outSize, m_pKey)));
-		m_pHeader->setFileInfoSize(i, outSize);
-		if (i == 0)
-		{
-			m_pHeader->setFileInfoOffset(i, SIZE + FILEINFOSIZE * fileNum);
-		}
-		else
-		{
-			m_pHeader->setFileInfoOffset(i, m_pHeader->getFileInfoOffset(i));
-		}
+		thXXTEA(i, fileNum);
 	}
+}
+
+void dataFormat::multipleXXTEA()
+{
+	__int64 fileNum = m_pHeader->getFileNum();
+
+ 	std::vector<std::thread> threads;
+ 	for(int i = 0; i < fileNum; i++)
+	{
+ 		threads.push_back(std::thread(thXXTEA, i, fileNum));
+ 	}
+ 	for(auto& thread : threads)
+ 	{
+ 		thread.join();
+ 	}
+}
+
+void dataFormat::thXXTEA(int index, __int64 fileNum)
+{
+	__int64 intSize = m_pHeader->getFileInfoSize(index);
+	__int64 outSize = 0;
+	strcpy(m_vecEncodeBuff[index], (m_pFile->xxTeaFile(m_vecFileBuff[index], intSize, outSize, m_pKey)));
+	m_pHeader->setFileInfoSize(index, outSize);
+	if (index == 0)
+		m_pHeader->setFileInfoOffset(index, SIZE + FILEINFOSIZE * fileNum);
+	else
+		m_pHeader->setFileInfoOffset(index, m_pHeader->getFileInfoOffset(index));
 }
 
 void dataFormat::format()

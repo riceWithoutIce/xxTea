@@ -2,18 +2,20 @@
 //
 
 #include "stdafx.h"
-#include <iostream>
 #include <vector>
-#include "fileReadAndSave.h"
 #include "dataFormat.h"
+#include <time.h>
 
-using namespace std;
 int _tmain(int argc, _TCHAR* argv[])
 {
+	clock_t start, finish;
+	start = clock();
+	double duration = 0;
 	dataFormat* pDataFormat = new dataFormat();
 	std::vector<char*> vecFilePath;
-	__int64 fileNum = 3;
+	__int64 fileNum = 20;
 	XXTEA_TYPE key[4] = {1, 2, 3, 4};
+
 	for (int i = 0; i < fileNum; i++)
 	{
 		char path[128] = "hello.txt";
@@ -22,11 +24,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	pDataFormat->setKey(key);
 	pDataFormat->readFile(fileNum, vecFilePath);
-	pDataFormat->xxTea();
+	pDataFormat->xxTea(false);
 	pDataFormat->format();
 	pDataFormat->display();
 
-	printf("complete\n");
+	finish = clock();
+	duration = (double)(finish - start) / CLOCKS_PER_SEC;
+	printf("complete in %d seconds\n", duration);
 
 	system("pause");
 
