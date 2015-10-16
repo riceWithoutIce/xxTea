@@ -9,6 +9,9 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	int isMultiple = 0;
+	XXTEA_TYPE key[4] = { 1, 2, 3, 4 };
+
 	static int verbose_flag;
 	int c;
 
@@ -16,10 +19,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	{        
 		static struct option long_options[] =
 		{
-			{_T("verbose"), ARG_NONE, &verbose_flag, 1},
-			{_T("brief"),   ARG_NONE, &verbose_flag, 0},
-			{_T("add"),     ARG_NONE, 0, _T('a')},
-			{_T("append"),  ARG_NONE, 0, _T('b')},
 			{_T("delete"),  ARG_REQ,  0, _T('d')},
 			{_T("create"),  ARG_REQ,  0, _T('c')},
 			{_T("file"),    ARG_REQ, 0 , _T('f')},
@@ -27,7 +26,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		};
 
 		int option_index = 0;
-		c = getopt_long(argc, argv, _T("abc:d:f:"), long_options, &option_index);
+		c = getopt_long(argc, argv, _T("c:"), long_options, &option_index);
 
 		// Check for end of operation or error
 		if (c == -1)
@@ -36,40 +35,16 @@ int _tmain(int argc, _TCHAR* argv[])
 		// Handle options
 		switch (c)
 		{
-		case 0:
-			/* If this option set a flag, do nothing else now. */
-			if (long_options[option_index].flag != 0)
-				break;
-			_tprintf (_T("option %s"), long_options[option_index].name);
-			if (optarg)
-				_tprintf (_T(" with arg %s"), optarg);
-			_tprintf (_T("\n"));
-			break;
-
-		case _T('a'):
-			_tprintf(_T("option -a\n"));
-			break;
-
-		case _T('b'):
-			_tprintf(_T("option -b\n"));
-			break;
-
 		case _T('c'):
-			_tprintf (_T("option -c with value `%s'\n"), optarg);
+			isMultiple = atoi((char*)optarg);
+			if (isMultiple)
+				printf("multiple thread to XXTEA.\n");
+			else
+				printf("single thread to XXTEA.\n");
 			break;
-
-		case _T('d'):
-			_tprintf (_T("option -d with value `%s'\n"), optarg);
-			break;
-
-		case _T('f'):
-			_tprintf (_T("option -f with value `%s'\n"), optarg);
-			break;
-
 		case '?':
 			/* getopt_long already printed an error message. */
 			break;
-
 		default:
 			abort();
 		}
@@ -85,8 +60,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		while (optind < argc) _tprintf (_T("%s "), argv[optind++]);
 		_tprintf (_T("\n"));
 	}
-	int isMultiple = true;
-	XXTEA_TYPE key[4] = {1, 2, 3, 4};
 
 	clock_t start, finish;
 	start = clock();
